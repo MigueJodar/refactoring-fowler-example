@@ -39,9 +39,9 @@ public class Customer {
 			double thisAmount = 0;
 			Rental each = rentals.next();
 			// determine amounts for each line
-			thisAmount = each.getCharge(thisAmount);
+			thisAmount = each._movie.getCharge(each, thisAmount);
 			
-			frequentRenterPoints = each.getFrequentRenterPoints(frequentRenterPoints);
+			frequentRenterPoints = each._movie.getFrequentRenterPoints(each, frequentRenterPoints);
 			// show figures for this rental
 			result += "\t" + each.getMovie().getTitle() + "\t"
 					+ String.valueOf(thisAmount) + "\n";
@@ -65,8 +65,8 @@ public class Customer {
 	        
 	        // REUTILIZACIÓN DE LÓGICA: Llamamos a los métodos de Rental
 	        // No hay "copy & paste" de fórmulas matemáticas, solo de la estructura del informe
-	        double thisAmount = each.getCharge(0); 
-	        frequentRenterPoints = each.getFrequentRenterPoints(frequentRenterPoints);
+	        double thisAmount = each._movie.getCharge(each, 0); 
+	        frequentRenterPoints = each._movie.getFrequentRenterPoints(each, frequentRenterPoints);
 
 	        // Formato específico para HTML
 	        result += "\t" + each.getMovie().getTitle() + "\t"
