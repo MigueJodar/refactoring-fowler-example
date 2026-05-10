@@ -53,4 +53,31 @@ public class Customer {
 				+ " frequent renter points";
 		return result;
 	}
+	
+	public String htmlStatement() {
+	    double totalAmount = 0;
+	    int frequentRenterPoints = 0;
+	    Iterator<Rental> rentals = _rentals.iterator();
+	    String result = "<H1>Rental Record for <EM>" + getName() + "</EM></H1><P>\n";
+	    
+	    while (rentals.hasNext()) {
+	        Rental each = rentals.next();
+	        
+	        // REUTILIZACIÓN DE LÓGICA: Llamamos a los métodos de Rental
+	        // No hay "copy & paste" de fórmulas matemáticas, solo de la estructura del informe
+	        double thisAmount = each.getCharge(0); 
+	        frequentRenterPoints = each.getFrequentRenterPoints(frequentRenterPoints);
+
+	        // Formato específico para HTML
+	        result += "\t" + each.getMovie().getTitle() + "\t"
+	                + String.valueOf(thisAmount) + "<BR>\n";
+	        totalAmount += thisAmount;
+	    }
+	    
+	    // Pie del informe en HTML
+	    result += "<P>Amount owed is <EM>" + String.valueOf(totalAmount) + "</EM></P>\n";
+	    result += "<P>You earned <EM>" + String.valueOf(frequentRenterPoints)
+	            + "</EM> frequent renter points</P>";
+	    return result;
+	}
 }

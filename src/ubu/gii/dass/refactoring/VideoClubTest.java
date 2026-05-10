@@ -55,5 +55,19 @@ public class VideoClubTest {
 		assertTrue("Calcula mal el alquiler", salidaEsperada.equals(salida));
 
 	}
+	
+	@Test
+	public void testHtmlAlquiler() {
+	    Rental r1 = new Rental(m11, 5);
+	    c1.addRental(r1);
+
+	    String salida = c1.htmlStatement();
+
+	    // Verificamos que contenga etiquetas HTML básicas y los datos correctos
+	    assertTrue("El informe HTML debe empezar con H1", salida.contains("<H1>"));
+	    assertTrue("Debe contener el nombre del cliente", salida.contains("Manuel"));
+	    assertTrue("Debe contener el título de la película", salida.contains("Sky Captain"));
+	    assertTrue("Debe mostrar el importe correcto", salida.contains("15.0"));
+	}
 
 }
